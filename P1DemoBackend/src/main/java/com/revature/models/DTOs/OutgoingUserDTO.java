@@ -3,6 +3,8 @@ package com.revature.models.DTOs;
 //This is a Data Transfer Object (DTO)
 //They are often used to model data that is being sent between client and server
 
+import com.revature.models.User;
+
 //In this case, we want to send User info without including that raw password
 //Yes, we could have just made a different constructor in the User class
     //Check the videogame DTOs for more interesting uses of DTOs
@@ -22,6 +24,14 @@ public class OutgoingUserDTO {
         this.userId = userId;
         this.username = username;
         this.role = role;
+    }
+
+    //see this in use in get all users in UserService
+    //way cleaner way to format a User into a DTO
+    public OutgoingUserDTO(User u) {
+        this.userId = u.getUserId();
+        this.username = u.getUsername();
+        this.role = u.getRole();
     }
 
     public int getUserId() {
