@@ -1,7 +1,43 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { Container, Table } from "react-bootstrap"
+import { User } from "../../Interfaces/User"
 
 export const UserTable:React.FC = () => {
 
+    //state object to store the User Array from the backend
+    const [users, setUsers] = useState<User[]>([])
+
+
+    //useEffect - we'll call a GET request for all users when the component loads
+    useEffect(() => {
+
+        //TODO: make sure the user is a manager, redirect them to login if not
+
+        getAllUsers()
+
+    }, []) //we want this to run once on load, so we use []
+
+
+    //Function to get all users from the backend (HTTP request!)
+    const getAllUsers = async () => {
+
+        try{
+            const response = await axios.get("http://localhost:8080/users")
+
+            //TODO: error throwing code
+
+            console.log(response.data) //print out the data just to see it
+
+            //store the user data in our "users" state object 
+            setUsers(response.data) 
+
+        } catch {
+            alert("Something went wrong trying to fetch users")
+        }
+
+
+    }
 
 
     return(
@@ -9,7 +45,7 @@ export const UserTable:React.FC = () => {
             
             <h3>Users: </h3>
 
-            <Table className="table-dark table-hover table-striped">
+            <Table className="table-dark table-hover table-striped w-50">
                 <thead>
                     <tr>
                         <th>User Id</th>
@@ -18,7 +54,14 @@ export const UserTable:React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {users.map((user:User) => (
+                        <tr key={user.userId}>
+                            <td>{user.userId}</td>
+                            <td>{user.username}</td>
+                            <td>{user.role}</td>
+                        </tr>
+                    ))} 
+                {/* WHY parenthesis to open the arrow func? because it implicitly returns */}
                 </tbody>
             </Table>
 
