@@ -29,6 +29,9 @@ public class UserController {
         //Let's return the Users in one line
         return ResponseEntity.ok(userService.getAllUsers());
 
+        //the parameter to .ok() is the RESPONSE BODY
+        //AKA the data we're sending back
+
     }
 
 
