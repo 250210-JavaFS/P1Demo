@@ -15,6 +15,7 @@ public class User {
     //We don't need to specify @Column UNLESS we want to define a name, or constraints
 
     @Column(nullable = false) //so now every User needs a username
+    //TODO: this should probably be unique
     private String username;
 
     private String password;
