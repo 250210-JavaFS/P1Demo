@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.DAOs.UserDAO;
 import com.revature.DAOs.VideoGameDAO;
 import com.revature.models.DTOs.IncomingGameDTO;
+
 import com.revature.models.User;
 import com.revature.models.VideoGame;
 import org.springframework.beans.factory.annotation.Autowired;
