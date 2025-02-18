@@ -35,8 +35,11 @@ export const UserTable:React.FC = () => {
         } catch {
             alert("Something went wrong trying to fetch users")
         }
+    }
 
-
+    //function that does a fake update delete (wanna show how to extract data from a map)
+    const updateUser = (user:User) => {
+        alert("User " + user.userId + " has been fake updated or deleted")
     }
 
 
@@ -61,8 +64,8 @@ export const UserTable:React.FC = () => {
                             <td>{user.username}</td>
                             <td>{user.role}</td>
                             <td>
-                                <Button variant="outline-success">Promote</Button>
-                                <Button variant="outline-danger">Fire</Button>
+                                <Button variant="outline-success" onClick={() => updateUser(user)}>Promote</Button>
+                                <Button variant="outline-danger" onClick={() => updateUser(user)}>Fire</Button>
                             </td>
                         </tr>
                     ))} 
