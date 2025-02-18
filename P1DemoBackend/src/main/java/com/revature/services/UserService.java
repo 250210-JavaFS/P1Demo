@@ -20,7 +20,6 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-
     //Get all users from the DB
     public List<OutgoingUserDTO> getAllUsers(){
 
