@@ -58,4 +58,6 @@ public class VideoGameService {
 
     }
 
+    //TODO: get games by user ID
+
 }

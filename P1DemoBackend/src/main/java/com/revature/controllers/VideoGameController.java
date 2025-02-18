@@ -29,4 +29,6 @@ public class VideoGameController {
 
     }
 
+    //TODO: get games by user ID
+
 }
