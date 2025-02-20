@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { store } from "../../GlobalData/store";
 
 export const Login:React.FC = () => {
 
@@ -50,13 +51,25 @@ export const Login:React.FC = () => {
 
         try{
 
-            const response = await axios.post("http://localhost:8080/auth/login", loginCreds)
-            //TODO: Ben - need withCredentials=true
+            const response = await axios.post("http://localhost:8080/auth/login", loginCreds, {withCredentials:true})
+            //withCredentials lets us interact with sessions on the backend
+            //every request that depends on the user being logged in, being an admin, etc, needs this
 
             //if the catch doesn't run, login was successful! save the data to our global store, then switch components
+            store.loggedInUser = response.data //this is our logged in user data from the backend
+
+            //greet the user with this newly stored data
+            alert(store.loggedInUser.username + " has logged in! Welcome.")
+
+            //users will get sent to users component if they're an "admin", or the games component if they're a "user"
+            if(store.loggedInUser.role === "admin"){
+                navigate("/users")
+            } else {
+                navigate("/games")
+            }
 
         } catch {
-
+            alert("Login unsuccessful")
         }
 
     }
@@ -91,7 +104,7 @@ export const Login:React.FC = () => {
                 </div>
                 
 
-            <Button variant="outline-success m-1">Login</Button>
+            <Button variant="outline-success m-1" onClick={login}>Login</Button>
             <Button variant="outline-dark" onClick={()=>navigate("/register")}>Register</Button>
         </Container>
     )
