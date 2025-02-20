@@ -1,8 +1,10 @@
 package com.revature.controllers;
 
+import com.revature.models.DTOs.LoginDTO;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,40 @@ public class AuthController {
         //Send the inserted User back to the client in a response
         return ResponseEntity.ok(returnedUser);
         //.ok() sends a 200 OK status code and allows us to send a response body
+
+    }
+
+    //Login (POST request)
+    @PostMapping("/login")
+    public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO, HttpSession session){
+
+        //NOTE: we have an HttpSession coming in through parameters, implicitly included in every HTTP request
+        //Login is where we set it up
+
+        //try to login (send the loginDTO to the service)
+        OutgoingUserDTO loggedInUser = authService.login(loginDTO);
+        //If anything goes wrong, the service throws an exception and our global Exception handler takes over
+
+        //If we get here, the login was successful - we can build up the User's session!
+        session.setAttribute("userId", loggedInUser.getUserId());
+        session.setAttribute("username", loggedInUser.getUsername());
+        session.setAttribute("role", loggedInUser.getRole());
+
+        //it's really easy to access these values with getAttribute()!
+        System.out.println("User " + session.getAttribute("username") + " has logged in!");
+
+        session.
+
+        /* WHY store all this info in a Session?
+
+          -It lets us store user info that can be used for checks throughout the app
+            -check that the user is logged in (session != null)
+            -check that a user's role is appropriate (role.equals("admin"))
+            -personalize the app (use the user's name in HTTP responses to use them in the UI etc)
+            -simplify our URLs!
+                -ex: use the stored userId in "findXByUserId" methods instead of sending it in the PATH
+                -This cleans up our URLs and secures them a bit more too.
+           */
 
     }
 
