@@ -62,7 +62,7 @@ public class AuthController {
             -check that the user is logged in (session != null)
             -check that a user's role is appropriate (role.equals("admin"))
             -personalize the app (use the user's name in HTTP responses to use them in the UI etc)
-            -simplify our URLs!
+            -simplify and secure our URLs!
                 -ex: use the stored userId in "findXByUserId" methods instead of sending it in the PATH
                 -This cleans up our URLs and secures them a bit more too.
            */
