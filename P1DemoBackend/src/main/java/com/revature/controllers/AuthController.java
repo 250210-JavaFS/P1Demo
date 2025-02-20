@@ -56,8 +56,6 @@ public class AuthController {
         //it's really easy to access these values with getAttribute()!
         System.out.println("User " + session.getAttribute("username") + " has logged in!");
 
-        session.
-
         /* WHY store all this info in a Session?
 
           -It lets us store user info that can be used for checks throughout the app
@@ -68,6 +66,9 @@ public class AuthController {
                 -ex: use the stored userId in "findXByUserId" methods instead of sending it in the PATH
                 -This cleans up our URLs and secures them a bit more too.
            */
+
+        //Return the User info to the client
+        return ResponseEntity.ok(loggedInUser);
 
     }
 
