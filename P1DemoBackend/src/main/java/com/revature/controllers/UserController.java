@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.aspects.AdminOnly;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
 import com.revature.services.UserService;
@@ -27,6 +28,7 @@ public class UserController {
 
     //Return all users to the client
     @GetMapping //GET requests ending in /users will go here
+    @AdminOnly //Only admins can use this method, thanks to our custom annotation
     public ResponseEntity<List<OutgoingUserDTO>> getAllUsers(){
 
         //Let's return the Users in one line
