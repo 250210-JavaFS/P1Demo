@@ -15,6 +15,9 @@ import java.util.Optional;
 @Repository //1 of the 4 stereotype annotations (make a class a bean)
 public interface UserDAO extends JpaRepository<User, Integer> {
 
-
+    //For login, we can check if an inpuuted username/password matches a record in the DB
+    //If it returns null, the user doesn't exist and login fails
+    //If it returns a User object, the user exists and login succeeds
+    public Optional<User> findByUsernameAndPassword(String username, String password);
 
 }
