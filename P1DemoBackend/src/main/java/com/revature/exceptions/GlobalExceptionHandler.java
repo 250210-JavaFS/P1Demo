@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice //This lets our handler intercept exceptions thrown in any controller
-//@Component //This needs to be a bean for it to work
 public class GlobalExceptionHandler {
 
     //In here, we can define how we want to handle any Exception that could possibly be thrown
@@ -25,5 +24,9 @@ public class GlobalExceptionHandler {
         //401 == UNAUTHORIZED - good for auth errors
         //we send the message in the exception in the response body (should change based on what went wrong)
     }
+
+    //TODO: add more exception handlers, make some custom exceptions
+
+    //TODO: add a handler for just "Exception" as a catch all
 
 }
