@@ -35,8 +35,6 @@ public class AuthAspect {
         if(session == null || session.getAttribute("userId") == null){
             throw new IllegalArgumentException("User must be logged in to do this!");
         }
-
-
     }
 
 
