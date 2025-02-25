@@ -2,11 +2,11 @@
 A Full Stack Application with a PostgreSQL Database, Spring Boot backend, and a React frontend
 
 ## Full Stack Functionalities
--Login
--Register
--Get All Users
--Spring AOP: Only Managers can get all users
--Spring AOP: Users must log in to do anything besides register
+- Login
+- Register
+- Get All Users
+- Spring AOP: Only Managers can get all users
+- Spring AOP: Users must log in to do anything besides register
 
 ## Backend only Functionalities
 
